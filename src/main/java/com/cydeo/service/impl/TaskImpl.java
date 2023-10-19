@@ -1,6 +1,7 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.TaskDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Status;
 import com.cydeo.service.TaskService;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,7 @@ public class TaskImpl extends AbstractMapService<TaskDTO,Long> implements TaskSe
         if(object.getStatus() == null){
 
             object.setStatus(findById(object.getId()).getStatus());
+            object.setAssignedDate(findById(object.getId()).getAssignedDate());
         }
         super.update(object.getId(),object);
     }
@@ -53,4 +55,10 @@ public class TaskImpl extends AbstractMapService<TaskDTO,Long> implements TaskSe
         return super.findById(id);
     }
 
+    @Override
+    public List<TaskDTO> findTaskByManager(UserDTO manager) {
+        return findAll().stream()
+                .filter(i -> i.getProject().getAssignedManager().equals(manager))
+                .collect(Collectors.toList());
+    }
 }

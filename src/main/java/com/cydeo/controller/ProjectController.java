@@ -1,6 +1,7 @@
 package com.cydeo.controller;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/project")
@@ -61,5 +64,16 @@ public class ProjectController {
         projectService.update(project);
         return "redirect:/project/create";
     }
+
+    @GetMapping("/manager/project-status")
+    public String getProjectByManager(Model model){
+
+        UserDTO manager = userService.findById("john@cydeo.com");
+        List<ProjectDTO> project = projectService.getCountedListOfProjectDTO(manager);
+        model.addAttribute("projects",project);
+
+        return "/manager/project-status";
+    }
+
 
 }
