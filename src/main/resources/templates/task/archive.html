@@ -41,12 +41,12 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                            <tr th:each="completedTask : ${archiveList}">
+                                                <td th:text="${completedTask.project.projectCode+' '+completedTask.project.projectName}"></td>
+                                                <td th:text="${completedTask.taskSubject}"></td>
+                                                <td th:text="${completedTask.assignedEmployee.firstName+' '+completedTask.assignedEmployee.lastName}"></td>
+                                                <td th:text="${completedTask.assignedDate}"></td>
+                                                <td th:text="${completedTask.status.value}"></td>
                                             </tr>
                                             </tbody>
                                         </table>

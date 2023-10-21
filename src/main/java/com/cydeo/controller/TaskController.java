@@ -88,6 +88,14 @@ public class TaskController {
         return "redirect:/task/employee/pending-tasks";
     }
 
+    @GetMapping("/employee/archive")
+    public String employeeArchive(Model model){
+        model.addAttribute("archiveList",taskService.findAllTaskByStatus(Status.COMPLETE));
+        return "/task/archive";
+        }
+
+
+
 
 
 

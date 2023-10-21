@@ -36,7 +36,7 @@
                                             <div class="col-sm-6 col-md-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Project</label>
-                                                    <select name="project" th:field="*{project}" class="custom-select" disabled>
+                                                    <select name="project" th:field="*{project}" class="custom-select" readonly>
                                                         <option th:value="${task.project.projectCode}"
                                                                 th:text="${task.project.projectCode+'-'+task.project.projectName}"></option>
                                                     </select>
@@ -47,7 +47,7 @@
                                             <div class="col-sm-6 col-md-6 col-xs-12">
                                                 <div class="form-group">
                                                     <label>Assigned Employee</label>
-                                                    <select name="assignedemployee" th:field="*{assignedEmployee}" class="custom-select" disabled>
+                                                    <select name="assignedemployee" th:field="*{assignedEmployee}" class="custom-select" readonly>
                                                         <option th:value="${task.assignedEmployee.userName}"
                                                                 th:text="${task.assignedEmployee.firstName+' '+task.assignedEmployee.lastName}"></option>
                                                     </select>
@@ -61,7 +61,7 @@
                                                         <div class="form-group">
                                                             <label for="tasksubject">Task Subject</label>
                                                             <input id="tasksubject" type="text" th:field="*{taskSubject}" class="form-control"
-                                                                   aria-describedby="inputGroupPrepend" disabled/>
+                                                                   aria-describedby="inputGroupPrepend" readonly/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,7 +75,7 @@
                                                             <label>Task Detail</label>
                                                             <textarea id="taskdetail" class="form-control" th:field="*{taskDetail}" rows="3"
                                                                       aria-describedby="inputGroupPrepend"
-                                                                      disabled></textarea>
+                                                                      readonly></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,7 +135,7 @@
                                                 <td th:text="${task.assignedDate}"></td>
                                                 <td th:text="${task.status.value}"></td>
                                                 <td>
-                                                    <a href="#" class="btn btn-warning rounded-0">Update</a>
+                                                    <a th:href="@{/task/employee/status/update/{id}(id=${task.id})}" class="btn btn-warning rounded-0">Update</a>
                                                 </td>
                                             </tr>
                                             </tbody>
