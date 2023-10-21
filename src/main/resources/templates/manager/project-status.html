@@ -55,7 +55,8 @@
                                                        th:href="@{/project/manager/complete/{id}(id=${project.projectCode})}">Complete
                                                     </a>
                                                     <a th:if="${project.unfinishedTaskCounts > 0 || project.projectStatus.value == 'Completed'}"
-                                                       class="btn btn-info rounded-0 disabled-button">Complete
+                                                       class="btn btn-info rounded-0 disabled-button"
+                                                       th:href="@{/project/manager/complete/{id}(id=${project.projectCode})}">Complete
                                                     </a>
                                                 </td>
                                             </tr>

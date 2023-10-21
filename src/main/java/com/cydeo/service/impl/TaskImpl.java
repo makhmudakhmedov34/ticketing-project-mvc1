@@ -37,11 +37,15 @@ public class TaskImpl extends AbstractMapService<TaskDTO,Long> implements TaskSe
 
     @Override
     public void update(TaskDTO object) {
-        if(object.getStatus() == null){
+//        if(object.getStatus() == null){
+//
+//            object.setStatus(findById(object.getId()).getStatus());
+//            object.setAssignedDate(findById(object.getId()).getAssignedDate());
+//        }
+        TaskDTO foundTask = findById(object.getId());
 
-            object.setStatus(findById(object.getId()).getStatus());
-            object.setAssignedDate(findById(object.getId()).getAssignedDate());
-        }
+        object.setStatus(foundTask.getStatus());
+        object.setAssignedDate(foundTask.getAssignedDate());
         super.update(object.getId(),object);
     }
 
@@ -61,4 +65,20 @@ public class TaskImpl extends AbstractMapService<TaskDTO,Long> implements TaskSe
                 .filter(i -> i.getProject().getAssignedManager().equals(manager))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<TaskDTO> findAllPendingTasks() {
+        return findAll().stream()
+                .filter(i -> !i.getStatus().equals(Status.COMPLETE))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateStatus(TaskDTO task) {
+        TaskDTO taskDTO = findById(task.getId());
+        taskDTO.setStatus(task.getStatus());
+        update(task);
+    }
+
+
 }
